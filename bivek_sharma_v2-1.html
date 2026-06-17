@@ -429,17 +429,17 @@
     <p class="demo-subtitle">Change the colour variable once and it updates everywhere on this card automatically</p>
 
     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;">
-      <button class="js-btn" type="button" onclick="document.getElementById('varCard').style.borderColor='#2ecc71'; document.getElementById('varCardTitle').style.color='#2ecc71'; document.getElementById('varCardBtn').style.background='#2ecc71';" style="border-color:#2ecc71; color:#2ecc71;">Green</button>
-      <button class="js-btn" type="button" onclick="document.getElementById('varCard').style.borderColor='#667eea'; document.getElementById('varCardTitle').style.color='#667eea'; document.getElementById('varCardBtn').style.background='#667eea';" style="border-color:#667eea; color:#667eea;">Purple</button>
-      <button class="js-btn" type="button" onclick="document.getElementById('varCard').style.borderColor='#f5a623'; document.getElementById('varCardTitle').style.color='#f5a623'; document.getElementById('varCardBtn').style.background='#f5a623';" style="border-color:#f5a623; color:#f5a623;">Orange</button>
-      <button class="js-btn" type="button" onclick="document.getElementById('varCard').style.borderColor='#e74c3c'; document.getElementById('varCardTitle').style.color='#e74c3c'; document.getElementById('varCardBtn').style.background='#e74c3c';" style="border-color:#e74c3c; color:#e74c3c;">Red</button>
-      <button class="js-btn" type="button" onclick="document.getElementById('varCard').style.borderColor='#1abc9c'; document.getElementById('varCardTitle').style.color='#1abc9c'; document.getElementById('varCardBtn').style.background='#1abc9c';" style="border-color:#1abc9c; color:#1abc9c;">Teal</button>
+      <button class="js-btn" type="button" onclick="setCSSVar('#2ecc71')" style="border-color:#2ecc71; color:#2ecc71;">Green</button>
+      <button class="js-btn" type="button" onclick="setCSSVar('#667eea')" style="border-color:#667eea; color:#667eea;">Purple</button>
+      <button class="js-btn" type="button" onclick="setCSSVar('#f5a623')" style="border-color:#f5a623; color:#f5a623;">Orange</button>
+      <button class="js-btn" type="button" onclick="setCSSVar('#e74c3c')" style="border-color:#e74c3c; color:#e74c3c;">Red</button>
+      <button class="js-btn" type="button" onclick="setCSSVar('#1abc9c')" style="border-color:#1abc9c; color:#1abc9c;">Teal</button>
     </div>
 
-    <div id="varCard" style="background:#0d1117; border:2px solid #2ecc71; border-radius:10px; padding:20px;">
-      <h4 id="varCardTitle" style="color:#2ecc71; margin-bottom:8px;">Themed Card</h4>
+    <div id="varCard" style="--card-accent:#2ecc71; background:#0d1117; border:2px solid var(--card-accent); border-radius:10px; padding:20px;">
+      <h4 id="varCardTitle" style="color:var(--card-accent); margin-bottom:8px;">Themed Card</h4>
       <p style="font-size:0.88rem; color:var(--muted); line-height:1.6; margin-bottom:12px;">This card border title and button all use the same CSS variable. Change the variable once and all three update together.</p>
-      <button id="varCardBtn" style="background:#2ecc71; color:#0f1117; border:none; padding:8px 18px; border-radius:6px; font-weight:600; cursor:pointer; font-family:'Space Grotesk',sans-serif;">Button</button>
+      <button id="varCardBtn" style="background:var(--card-accent); color:#0f1117; border:none; padding:8px 18px; border-radius:6px; font-weight:600; cursor:pointer; font-family:'Space Grotesk',sans-serif;">Button</button>
     </div>
 
     <div class="code-block" style="margin-top:14px;">
@@ -747,10 +747,7 @@ function updateFlex() {
 
 // ── CSS VARIABLES ─────────────────────────────────────────────────────
 function setCSSVar(color) {
-  document.getElementById('varCard').style.borderColor = color;
-  document.getElementById('varCardTitle').style.color  = color;
-  document.getElementById('varCardBtn').style.background = color;
-  document.getElementById('varCardBtn').style.color = '#0f1117';
+  document.getElementById('varCard').style.setProperty('--card-accent', color);
 }
 
 // ── BOOTSTRAP GRID ────────────────────────────────────────────────────
@@ -816,7 +813,7 @@ function runLoop(type) {
   } else {
     const fruits = ['apple','banana','mango','grape','kiwi'];
     fruits.forEach(f => out += `➜ ${f}\n`);
-    codeEl.innerHTML = `<span class="kw">const</span> fruits = [<span class="str">'apple'</span>,<span class="str">'banana'</span>,<span class="str">'mango'</span>];\nfruits.<span class="fn">forEach</span>(f => console.log(f));`;
+    codeEl.innerHTML = `<span class="kw">const</span> fruits = [<span class="str">'apple'</span>,<span class="str">'banana'</span>,<span class="str">'mango'</span>,<span class="str">'grape'</span>,<span class="str">'kiwi'</span>];\nfruits.<span class="fn">forEach</span>(f => console.log(f));`;
   }
   document.getElementById('loopOutput').textContent = out.trim();
 }
